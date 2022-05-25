@@ -7,7 +7,10 @@ public class PlayerMove : MonoBehaviour
 {
     [SerializeField] float _speed = 5;
 
+    bool _stop = false;
+
     Rigidbody2D _rb;
+
     void Start()
     {
         Init();
@@ -16,6 +19,13 @@ public class PlayerMove : MonoBehaviour
     void Init()
     {
         _rb = GetComponent<Rigidbody2D>();
+
+        GameManager gameManager = GameManager.Instance;
+        if (gameManager != null)
+        {
+            gameManager.OnPause += Pause;
+            gameManager.OnResume += Resume;
+        }
     }
 
     void Update()
@@ -35,6 +45,19 @@ public class PlayerMove : MonoBehaviour
     
     void Move(Vector2 _dir)
     {
+        if (_stop) return;
+
         _rb.velocity = _dir.normalized * _speed;
+    }
+
+    void Pause()
+    {
+        _stop = true;
+        _rb.angularVelocity = 0;
+    }
+
+    void Resume()
+    {
+        _stop = false;
     }
 }
