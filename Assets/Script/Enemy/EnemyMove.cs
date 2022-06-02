@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyMove : MonoBehaviour
 {
     [SerializeField] float _speed = 1;
+    [SerializeField] bool _test = false;
 
     bool _stop = false;
 
     Rigidbody2D _rb;
     PlayerManager _playerManager;
+    PoolEnemy _poolEnemy;
 
     void Start()
     {
@@ -26,7 +29,11 @@ public class EnemyMove : MonoBehaviour
         {
             gameManager.OnPause += Pause;
             gameManager.OnResume += Resume;
-        }  
+        }
+
+        _poolEnemy = GetComponent<PoolEnemy>();
+        _poolEnemy.ObserveEveryValueChanged(_poolEnemy => _poolEnemy.IsActive)
+            .Subscribe(value => _stop = value);
     }
     
     void Update()
@@ -46,11 +53,13 @@ public class EnemyMove : MonoBehaviour
     void Pause()
     {
         _stop = true;
+        _rb.Sleep();
         _rb.angularVelocity = 0;
     }
 
     void Resume()
     {
         _stop = false;
+        _rb.WakeUp();
     }
 }
