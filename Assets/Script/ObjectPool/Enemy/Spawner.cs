@@ -22,7 +22,7 @@ public class Spawner : MonoBehaviour
     private void Start()
     {
         _enemyPool.SetBaseObj(_prefab, _root);
-        _enemyPool.SetCapacity(1000);
+        _enemyPool.SetCapacity(10);
 
         GameManager.Instance.Setup();
     }
@@ -44,6 +44,7 @@ public class Spawner : MonoBehaviour
 
     private void Spawn()
     {
+        Debug.Log("Spawn");
         var enemy = _enemyPool.Instantiate();
 
         _popPos.x = PlayerManager.Instance.Player.transform.position.x + _spawnPosition * Mathf.Cos(_cRad);

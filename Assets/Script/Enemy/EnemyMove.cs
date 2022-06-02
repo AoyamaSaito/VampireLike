@@ -7,9 +7,8 @@ using UnityEngine;
 public class EnemyMove : MonoBehaviour
 {
     [SerializeField] float _speed = 1;
-    [SerializeField] bool _test = false;
 
-    bool _stop = false;
+    bool _isMove = false;
 
     Rigidbody2D _rb;
     PlayerManager _playerManager;
@@ -33,7 +32,8 @@ public class EnemyMove : MonoBehaviour
 
         _poolEnemy = GetComponent<PoolEnemy>();
         _poolEnemy.ObserveEveryValueChanged(_poolEnemy => _poolEnemy.IsActive)
-            .Subscribe(value => _stop = value);
+            .Subscribe(value => Active(value));
+
     }
     
     void Update()
@@ -43,23 +43,29 @@ public class EnemyMove : MonoBehaviour
 
     void Chase()
     {
-        if (_stop) return;
+        if (!_isMove) return;
 
         _playerManager = PlayerManager.Instance;
         Vector3 dir = _playerManager.ReturnPlayerDirection(transform.position).normalized;
         _rb.velocity = dir * _speed;
     }
 
+    void Active(bool b)
+    {
+        _isMove = b!;
+        _rb.simulated = b;
+    }
+
     void Pause()
     {
-        _stop = true;
+        _isMove = true;
         _rb.Sleep();
         _rb.angularVelocity = 0;
     }
 
     void Resume()
     {
-        _stop = false;
+        _isMove = false;
         _rb.WakeUp();
     }
 }

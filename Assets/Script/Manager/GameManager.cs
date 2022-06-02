@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class GameManager : SingletonMonoBehaviour<GameManager>
+public class GameManager 
 {
     [Tooltip("ポーズ時に呼ばれるイベント")] public event Action OnPause;
     [Tooltip("再開時に呼ばれるイベント")] public event Action OnResume;
 
-    List<PoolEnemy> _enemies = new List<PoolEnemy>();
+    static private GameManager _instance = new GameManager();
+    static public GameManager Instance => _instance;
 
     void Start()
     {
