@@ -60,6 +60,12 @@ public class ObjectPool<T> where T : UnityEngine.Object, IObjectPool
             break;
         }
 
+        if(ret == null)
+        {
+            SetCapacity(Pool.Count + Pool.Count/2);
+            return Instantiate();
+        }
+
         return ret;
     }
 }

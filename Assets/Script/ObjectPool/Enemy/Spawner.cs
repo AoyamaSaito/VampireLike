@@ -9,6 +9,7 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] float _time = 5f;
     [SerializeField] float _spawnPosition = 10;
+    [SerializeField] int _spawnCount = 100;
     [SerializeField] PoolEnemy _prefab;
     [SerializeField] Transform _root;
 
@@ -22,7 +23,7 @@ public class Spawner : MonoBehaviour
     private void Start()
     {
         _enemyPool.SetBaseObj(_prefab, _root);
-        _enemyPool.SetCapacity(10);
+        _enemyPool.SetCapacity(_spawnCount);
 
         GameManager.Instance.Setup();
     }
@@ -50,6 +51,6 @@ public class Spawner : MonoBehaviour
         _popPos.x = PlayerManager.Instance.Player.transform.position.x + _spawnPosition * Mathf.Cos(_cRad);
         _popPos.y = PlayerManager.Instance.Player.transform.position.y + _spawnPosition * Mathf.Sin(_cRad);
         enemy.transform.position = _popPos;
-        _cRad += 0.1f;
+        _cRad += 1f;
     }
 }
