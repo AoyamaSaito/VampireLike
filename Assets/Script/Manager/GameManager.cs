@@ -11,6 +11,7 @@ public class GameManager
 
     static private GameManager _instance = new GameManager();
     static public GameManager Instance => _instance;
+    private GameManager() { }
 
     void Start()
     {
