@@ -33,14 +33,13 @@ public class PlayerMove : MonoBehaviour
         Move(PlayerInput());
     }
 
-    float _h = 0;
-    float _v = 0;
-    Vector2 PlayerInput()
-    {
-        _h = Input.GetAxisRaw("Horizontal");
-        _v = Input.GetAxisRaw("Vertical");
 
-        return new Vector2(_h, _v);
+    Vector2 PlayerInput(float h = 0, float v = 0)
+    {
+        h = Input.GetAxisRaw("Horizontal");
+        v = Input.GetAxisRaw("Vertical");
+
+        return new Vector2(h, v);
     }
     
     void Move(Vector2 _dir)
