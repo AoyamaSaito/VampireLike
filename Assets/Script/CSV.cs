@@ -4,19 +4,16 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.IO;
 
-public class CSV : MonoBehaviour
+public class CSV : SingletonMonoBehaviour<CSV>
 {
-    const string SHEET_ID = "シートID";
-    const string SHEET_NAME = "シート1";
-
-    void Start()
+    public void StartReading(string id, string name)
     {
-        StartCoroutine(Method(SHEET_NAME));
+        StartCoroutine(Method(id, name));
     }
 
-    IEnumerator Method(string _SHEET_NAME)
+    IEnumerator Method(string _SHEET_ID, string _SHEET_NAME)
     {
-        UnityWebRequest request = UnityWebRequest.Get("https://docs.google.com/spreadsheets/d/" + SHEET_ID + "/gviz/tq?tqx=out:csv&sheet=" + _SHEET_NAME);
+        UnityWebRequest request = UnityWebRequest.Get("https://docs.google.com/spreadsheets/d/" + _SHEET_ID + "/gviz/tq?tqx=out:csv&sheet=" + _SHEET_NAME);
         yield return request.SendWebRequest();
 
         if (request.isHttpError || request.isNetworkError)
@@ -25,10 +22,10 @@ public class CSV : MonoBehaviour
         }
         else
         {
-            List<string[]> characterDataArrayList = ConvertToArrayListFrom(request.downloadHandler.text);
-            foreach (string[] characterDataArray in characterDataArrayList)
+            List<string[]> dataArrayList = ConvertToArrayListFrom(request.downloadHandler.text);
+            foreach (string[] DataArray in dataArrayList)
             {
-                WeponData characterData = new WeponData(characterDataArray);
+                WeponData characterData = new WeponData(DataArray);
             }
         }
     }
