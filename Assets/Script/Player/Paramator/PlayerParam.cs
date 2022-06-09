@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerParam : MonoBehaviour
+public class PlayerParam : MonoBehaviour, IPlayerHit
 {
     private void Start()
     {
@@ -12,5 +12,10 @@ public class PlayerParam : MonoBehaviour
     private void Init()
     {
         PlayerManager.Instance.SetPlayer(this.gameObject);
+    }
+
+    public void PlayerHit(int damage)
+    {
+
     }
 }

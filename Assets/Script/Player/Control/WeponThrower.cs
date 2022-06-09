@@ -25,12 +25,12 @@ public class WeaponThrower : MonoBehaviour
         }
     }
 
-    IEnumerator Timer(int index)
-    {
-        bool i = false;
-        while (i)
-        {
+    //IEnumerator Timer(int index)
+    //{
+    //    bool i = false;
+    //    while (i)
+    //    {
             
-        }
-    }
+    //    }
+    //}
 }

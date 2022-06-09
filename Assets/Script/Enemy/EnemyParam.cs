@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyParam : MonoBehaviour
+public class EnemyParam : MonoBehaviour, IWeaponHit
 {
     public event Action OnDamage;
     public event Action OnDeath;
@@ -12,7 +12,7 @@ public class EnemyParam : MonoBehaviour
     int _power = 0;
     GameObject _expObject = null;
 
-    public void Damage(int damage)
+    public void WeaponHit(int damage)
     {
         _hp -= damage;
         OnDamage();
@@ -21,10 +21,5 @@ public class EnemyParam : MonoBehaviour
         {
             OnDeath();
         }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        
     }
 }
