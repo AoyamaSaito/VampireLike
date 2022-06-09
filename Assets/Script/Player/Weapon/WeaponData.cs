@@ -2,12 +2,14 @@ using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/CreateWeponParamAsset")]
-public class WeponData : ScriptableObject
+public class WeaponData : ScriptableObject, ILevel
 {
-    [SerializeField] Wepon[] _wepon;
+    [SerializeField] Weapon[] _wepon;
 
     int _level = 0;
-    public Wepon Wepon => _wepon[_level];
+
+    public int Level => _level;
+    public Weapon Wepon => _wepon[_level];
 
     public void LevelUp()
     {
@@ -16,7 +18,7 @@ public class WeponData : ScriptableObject
 }
 
 [Serializable]
-public class Wepon
+public class Weapon
 {
     [SerializeField, Tooltip("“G‚É—^‚¦‚éƒ_ƒ[ƒW")]
     int _power;

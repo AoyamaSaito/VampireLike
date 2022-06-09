@@ -2,17 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeponThrower : MonoBehaviour
+public class WeaponThrower : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] List<WeaponBase> _weaponBases;
+
+    float _timer = 0;
+
+    private void Update()
     {
-        
+        _timer += Time.deltaTime;
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Throw()
     {
-        
+        for(int i = 0; i < _weaponBases.Count; ++i)
+        {
+            for(int j = 0; j < _weaponBases[i].Quantity; ++i)
+            {
+                _weaponBases[i].Create();
+            }
+        }
+    }
+
+    IEnumerator Timer(int index)
+    {
+        bool i = false;
+        while (i)
+        {
+            
+        }
     }
 }
