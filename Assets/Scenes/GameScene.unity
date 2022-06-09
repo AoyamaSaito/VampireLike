@@ -462,7 +462,7 @@ GameObject:
   - component: {fileID: 1078592508}
   - component: {fileID: 1078592507}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: DataManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20716,7 +20716,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 66548470104494708, guid: 955dd6b5f84a9454f9aacff06ded8fe0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 66548470104494709, guid: 955dd6b5f84a9454f9aacff06ded8fe0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8305346945224543020, guid: 955dd6b5f84a9454f9aacff06ded8fe0, type: 3}
       propertyPath: m_Camera

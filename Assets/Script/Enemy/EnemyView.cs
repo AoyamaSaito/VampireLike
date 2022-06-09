@@ -21,8 +21,7 @@ public class EnemyView : MonoBehaviour
     private void Init()
     {
         _poolEnemy = GetComponent<PoolEnemy>();
-
-        _poolEnemy.ObserveEveryValueChanged(_poolEnemy => _poolEnemy.IsActive)
+        _poolEnemy?.ObserveEveryValueChanged(_poolEnemy => _poolEnemy.IsActive)
             .Subscribe(value => _image.enabled = value!);
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.IO;
 
-public class CSV : SingletonMonoBehaviour<CSV>
+public class CSVWepon : SingletonMonoBehaviour<CSVWepon>
 {
     public void StartReading(string id, string name)
     {
@@ -25,7 +25,7 @@ public class CSV : SingletonMonoBehaviour<CSV>
             List<string[]> dataArrayList = ConvertToArrayListFrom(request.downloadHandler.text);
             foreach (string[] DataArray in dataArrayList)
             {
-                WeponData characterData = new WeponData(DataArray);
+                //WeponData characterData = new WeponData(DataArray);
             }
         }
     }

@@ -31,7 +31,7 @@ public class EnemyMove : MonoBehaviour
         }
 
         _poolEnemy = GetComponent<PoolEnemy>();
-        _poolEnemy.ObserveEveryValueChanged(_poolEnemy => _poolEnemy.IsActive)
+        _poolEnemy?.ObserveEveryValueChanged(_poolEnemy => _poolEnemy.IsActive)
             .Subscribe(value => Active(value));
 
     }
