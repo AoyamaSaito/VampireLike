@@ -13,15 +13,21 @@ public abstract class WeaponBase : MonoBehaviour, IObjectPool
     private SpriteRenderer _image;
     [Header("ƒf[ƒ^")]
     [SerializeField]
-    private WeaponData _weponData;
+    private WeaponData _weaponData;
 
-    protected int _power = 0;
+    private int _power = 0;
     public int Power => _power;
-    protected float _interval = 0;
+    private float _interval = 0;
     public float Interval => _interval;
-    protected int _quantity = 0;
+    private int _quantity = 0;
     public int Quantity => _quantity;
-    private Weapon _weapon;
+
+    private void Awake()
+    {
+        SetParamator(_weaponData);
+    }
+
+    virtual public void OnStart() { }
 
     private bool _isActrive = false;
     public bool IsActive => _isActrive;
@@ -39,8 +45,7 @@ public abstract class WeaponBase : MonoBehaviour, IObjectPool
         _image.enabled = true;
         _rb.simulated = true;
 
-        _weapon = _weponData.Wepon;
-        SetParamator(_weapon.Power, _weapon.Interval, _weapon.Quantity);
+        SetParamator(_weaponData);
 
         OnCreate();
     }
@@ -51,10 +56,14 @@ public abstract class WeaponBase : MonoBehaviour, IObjectPool
         _rb.simulated = false;
     }
 
-    private void SetParamator(int power, float interval, int quantity)
+    private void SetParamator(WeaponData weaponData)
     {
-        _power = power;
-        _interval = interval;
-        _quantity = quantity;
+        Debug.Log(weaponData.Wepon.Power);
+        Debug.Log(weaponData.Wepon.Interval);
+        Debug.Log(weaponData.Wepon.Quantity);
+
+        _power = weaponData.Wepon.Power;
+        _interval = weaponData.Wepon.Interval;
+        _quantity = weaponData.Wepon.Quantity;
     }
 }

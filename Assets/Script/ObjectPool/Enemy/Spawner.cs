@@ -45,12 +45,11 @@ public class Spawner : MonoBehaviour
 
     private void Spawn(EnemyParam param = default)
     {
-        Debug.Log("Spawn");
         var enemy = _enemyPool.Instantiate();
-        if(enemy.TryGetComponent<EnemyParam>(out param))
-        {
-            param.OnDeath += enemy.Destroy;
-        }
+        //if(enemy.TryGetComponent<EnemyParam>(out param))
+        //{
+        //    param.OnDeath += enemy.Destroy;
+        //}
 
         _popPos.x = PlayerManager.Instance.Player.transform.position.x + _spawnPosition * Mathf.Cos(_cRad);
         _popPos.y = PlayerManager.Instance.Player.transform.position.y + _spawnPosition * Mathf.Sin(_cRad);

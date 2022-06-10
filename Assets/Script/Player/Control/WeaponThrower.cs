@@ -6,6 +6,10 @@ using UnityEngine;
 public class WeaponThrower : MonoBehaviour
 {
     [SerializeField] List<WeaponBase> _weaponBases;
+    [SerializeField] Transform _root;
+
+    List<ObjectPool<WeaponBase>> _weaponPool = new List<ObjectPool<WeaponBase>>();
+    public List<ObjectPool<WeaponBase>> WeaponPool => _weaponPool;
 
     private void Start()
     {
@@ -14,30 +18,44 @@ public class WeaponThrower : MonoBehaviour
 
     private void Throw()
     {
-        foreach(var weapon in _weaponBases)
+        for(int i = 0; i < _weaponBases.Count; ++i)
         {
-            StartCoroutine(ThrowTimer(weapon));
+            ObjectPool<WeaponBase> weaponPool = new ObjectPool<WeaponBase>();
+            foreach(var weapon in _weaponBases)
+            {
+                Debug.Log(weaponPool);
+                Debug.Log(weapon);
+                Debug.Log(weapon.Quantity);
+                Debug.Log(weapon.Interval);
+                weaponPool.SetBaseObj(weapon, _root);
+                weaponPool.SetCapacity(weapon.Quantity);
+
+                StartCoroutine(ThrowTimer(weapon, weaponPool));
+            }
         }
     }
 
-    IEnumerator ThrowTimer(WeaponBase _weapon, bool n = false)
+    IEnumerator ThrowTimer(WeaponBase weapon, ObjectPool<WeaponBase> weaponPool, bool n = false)
     {
         while (n!)
         {
-            float _interval = _weapon.Interval;
+            float _interval = weapon.Interval;
             yield return new WaitForSeconds(_interval);
-            for (int i = 0; i < _weapon.Quantity; ++i)
+            for (int i = 0; i < weapon.Quantity; ++i)
             {
-                _weapon.Create();
+                weaponPool.Instantiate();
             }
         }
     }
 
     public void StopThrow()
     {
-        foreach (var weapon in _weaponBases)
+        foreach (var weaponPool in _weaponPool)
         {
-            StopCoroutine(ThrowTimer(weapon));
+            foreach (var weapon in _weaponBases)
+            {
+                StopCoroutine(ThrowTimer(weapon, weaponPool));
+            }
         }
     }
 
