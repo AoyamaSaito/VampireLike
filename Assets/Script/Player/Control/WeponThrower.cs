@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 public class WeaponThrower : MonoBehaviour
@@ -8,10 +9,20 @@ public class WeaponThrower : MonoBehaviour
 
     float _timer = 0;
 
-    private void Update()
+    private void Start()
     {
-        _timer += Time.deltaTime;
+        ThrowStart();
 
+        _weaponBases.ObserveEveryValueChanged(_weaponBases => _weaponBases.Count)
+            .Subscribe(_ => ThrowStart());
+    }
+
+    private void ThrowStart()
+    {
+        foreach(var weapon in _weaponBases)
+        {
+            StartCoroutine(ThrowTimer(weapon));
+        }
     }
 
     public void Throw()
@@ -25,12 +36,21 @@ public class WeaponThrower : MonoBehaviour
         }
     }
 
-    //IEnumerator Timer(int index)
-    //{
-    //    bool i = false;
-    //    while (i)
-    //    {
+    IEnumerator ThrowTimer(WeaponBase _weapon)
+    {
+        bool n = false;
+        while (n!)
+        {
+            for (int i = 0; i < _weaponBases.Count; ++i)
+            {
+                float _interval = _weapon.Interval;
+                yield return new WaitForSeconds(_interval);
+                for (int j = 0; j < _weaponBases[i].Quantity; ++i)
+                {
+                    _weaponBases[i].Create();
+                }
+            }
             
-    //    }
-    //}
+        }
+    }
 }
