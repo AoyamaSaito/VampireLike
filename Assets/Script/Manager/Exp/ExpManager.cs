@@ -9,10 +9,11 @@ public class ExpManager
     static public ExpManager Instance => _instance;
     private ExpManager() { }
 
-    int[] _levelUpTable;
+    private int[] _levelUpTable = ExpTable.Instance.LevelTable;
     private int _level = 0;
     private int _levelUpExp => _levelUpTable[_level];
     public int LevlUpExp => _levelUpExp;
+
     public IReadOnlyReactiveProperty<int> CurrentExp => _currentExp;
     private readonly IntReactiveProperty _currentExp = new IntReactiveProperty(0);
 
