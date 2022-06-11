@@ -23,24 +23,24 @@ public class WeaponThrower : MonoBehaviour
             ObjectPool<WeaponBase> weaponPool = new ObjectPool<WeaponBase>();
             foreach(var weapon in _weaponBases)
             {
-                Debug.Log(weaponPool);
-                Debug.Log(weapon);
-                Debug.Log(weapon.Quantity);
-                Debug.Log(weapon.Interval);
                 weaponPool.SetBaseObj(weapon, _root);
-                weaponPool.SetCapacity(weapon.Quantity);
+                weaponPool.SetCapacity(10);
 
                 StartCoroutine(ThrowTimer(weapon, weaponPool));
             }
         }
     }
 
-    IEnumerator ThrowTimer(WeaponBase weapon, ObjectPool<WeaponBase> weaponPool, bool n = false)
+    IEnumerator ThrowTimer(WeaponBase weapon, ObjectPool<WeaponBase> weaponPool)
     {
+        bool n = true;
+        Debug.Log("ThrowŠJŽn");
         while (n!)
         {
             float _interval = weapon.Interval;
+            Debug.Log("‘Ò‹@");
             yield return new WaitForSeconds(_interval);
+            Debug.Log("Throw");
             for (int i = 0; i < weapon.Quantity; ++i)
             {
                 weaponPool.Instantiate();

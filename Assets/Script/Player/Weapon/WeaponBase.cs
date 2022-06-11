@@ -15,12 +15,12 @@ public abstract class WeaponBase : MonoBehaviour, IObjectPool
     [SerializeField]
     private WeaponData _weaponData;
 
-    private int _power = 0;
-    public int Power => _power;
-    private float _interval = 0;
-    public float Interval => _interval;
-    private int _quantity = 0;
-    public int Quantity => _quantity;
+    private int _power;
+    public int Power => _weaponData.Wepon.Power;
+    private float _interval;
+    public float Interval => _weaponData.Wepon.Interval;
+    private int _quantity;
+    public int Quantity => _weaponData.Wepon.Quantity;
 
     private void Awake()
     {
@@ -38,12 +38,14 @@ public abstract class WeaponBase : MonoBehaviour, IObjectPool
     {
         _image.enabled = false;
         _rb.simulated = false;
+        _isActrive = false;
     }
 
     public void Create()
     {
         _image.enabled = true;
         _rb.simulated = true;
+        _isActrive = true;
 
         SetParamator(_weaponData);
 
@@ -54,6 +56,7 @@ public abstract class WeaponBase : MonoBehaviour, IObjectPool
     {
         _image.enabled = false;
         _rb.simulated = false;
+        _isActrive = false;
     }
 
     private void SetParamator(WeaponData weaponData)
