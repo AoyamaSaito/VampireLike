@@ -13,6 +13,10 @@ public class GameManager
     static public GameManager Instance => _instance;
     private GameManager() { }
 
+    int _stackLevelup = 0;
+    SkillSelect _sklSelect = null;
+    static public int Level;
+
     void Start()
     {
         
@@ -27,9 +31,24 @@ public class GameManager
     {
 
     }
-    // Update is called once per frame
-    void Update()
+
+    public void LevelUpSelect(SkillSelectTable table)
     {
-        
+        switch (table.Type)
+        {
+            case SelectType.Skill:
+                WeaponThrower.Instance.LevelUp(table.TargetName);
+                break;
+        }
+
+        if (_stackLevelup > 0)
+        {
+            _sklSelect.SelectStartDelay();
+            _stackLevelup--;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
     }
 }

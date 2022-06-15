@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class WeaponBase : MonoBehaviour, IObjectPool
+public abstract class WeaponBase : MonoBehaviour, IObjectPool, ILevel
 {
     //[SerializeField]
     //private float _movePower = 30f;
@@ -14,13 +14,16 @@ public abstract class WeaponBase : MonoBehaviour, IObjectPool
     [Header("ƒf[ƒ^")]
     [SerializeField]
     private WeaponData _weaponData;
+    public WeaponData WeaponData => _weaponData;
 
+    private int _level = 0;
+    //public int Level => _level;
     private int _power;
-    public int Power => _weaponData.Wepon.Power;
+    public int Power => _weaponData.Wepon[_level].Power;
     private float _interval;
-    public float Interval => _weaponData.Wepon.Interval;
+    public float Interval => _weaponData.Wepon[_level].Interval;
     private int _quantity;
-    public int Quantity => _weaponData.Wepon.Quantity;
+    public int Quantity => _weaponData.Wepon[_level].Quantity;
 
     private void Awake()
     {
@@ -61,12 +64,17 @@ public abstract class WeaponBase : MonoBehaviour, IObjectPool
 
     private void SetParamator(WeaponData weaponData)
     {
-        Debug.Log(weaponData.Wepon.Power);
-        Debug.Log(weaponData.Wepon.Interval);
-        Debug.Log(weaponData.Wepon.Quantity);
+        Debug.Log(weaponData.Wepon[_level].Power);
+        Debug.Log(weaponData.Wepon[_level].Interval);
+        Debug.Log(weaponData.Wepon[_level].Quantity);
 
-        _power = weaponData.Wepon.Power;
-        _interval = weaponData.Wepon.Interval;
-        _quantity = weaponData.Wepon.Quantity;
+        _power = weaponData.Wepon[_level].Power;
+        _interval = weaponData.Wepon[_level].Interval;
+        _quantity = weaponData.Wepon[_level].Quantity;
+    }
+
+    public void LevelUp()
+    {
+        _level++;
     }
 }

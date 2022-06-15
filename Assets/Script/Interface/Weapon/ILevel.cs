@@ -4,6 +4,6 @@ using UnityEngine;
 
 interface ILevel
 {
-    int Level { get; }
+    //int Level { get; }
     void LevelUp();
 }

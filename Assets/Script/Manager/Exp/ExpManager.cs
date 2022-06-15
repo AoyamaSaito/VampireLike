@@ -30,6 +30,7 @@ public class ExpManager
     {
         _currentExp.Value = 0;
         _level++;
+        
         GetExp(remainder);
     }
 

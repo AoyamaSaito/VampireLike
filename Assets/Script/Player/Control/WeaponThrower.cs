@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UniRx;
 using UnityEngine;
 
-public class WeaponThrower : MonoBehaviour
+public class WeaponThrower : SingletonMonoBehaviour<WeaponThrower>
 {
     [SerializeField] List<WeaponBase> _weaponBases;
     [SerializeField] Transform _root;
@@ -66,4 +67,11 @@ public class WeaponThrower : MonoBehaviour
         Throw();
     }
 
+    public void LevelUp(string name)
+    {
+        foreach(var weapon in _weaponBases.Where(s => s.name == name))
+        {
+            weapon.LevelUp();
+        }
+    }
 }

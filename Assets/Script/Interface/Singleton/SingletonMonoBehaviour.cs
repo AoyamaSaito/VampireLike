@@ -15,6 +15,8 @@ public abstract class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBe
         CheckInstance();
     }
 
+    public virtual void OnAwake(){ }
+
     /// <summary>インスタンスがなければ代入する、すでにあればなにもしない</summary>
     /// <returns></returns>
     protected void CheckInstance()

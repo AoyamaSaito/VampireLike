@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class SkillSelect : MonoBehaviour
+public class SkillSelect : SingletonMonoBehaviour<SkillSelect>
 {
     [SerializeField] List<GameObject> _selectList;
 
@@ -13,7 +13,7 @@ public class SkillSelect : MonoBehaviour
 
     bool _startEvent = false;
 
-    private void Awake()
+    public override void OnAwake()
     {
         _canvas = GetComponent<CanvasGroup>();
         //_canvas.alpha = 0;
@@ -56,7 +56,7 @@ public class SkillSelect : MonoBehaviour
         _canvas.alpha = 1;
 
         List<SkillSelectTable> table = new List<SkillSelectTable>();
-        var list = GameData.SkillSelectTable.Where(s => GameManager.Level >= s.Level);
+        var list = SkillData.SkillSelectTable.Where(s => GameManager.Level >= s.Level);
 
         int totalProb = list.Sum(s => s.Probability);
         int rand = Random.Range(0, totalProb);
@@ -75,7 +75,7 @@ public class SkillSelect : MonoBehaviour
                 {
                     _selectTable[i] = s;
                     _selectText[i].text = s.Name;
-                    list = list.Where(ls => !(ls.Type == s.Type && ls.TargetId == s.TargetId));
+                    list = list.Where(ls => !(ls.Type == s.Type && ls.TargetName == s.TargetName));
                     break;
                 }
                 rand -= s.Probability;

@@ -1,18 +1,33 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class SkillData : MonoBehaviour
+public enum SelectType
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    Skill = 1,
+    Passive = 2,
+    Execute = 3,
+}
 
-    // Update is called once per frame
-    void Update()
+[Serializable]
+public class SkillSelectTable
+{
+    public SelectType Type;
+    public string TargetName;
+    public string Name;
+    public int Level;
+    public int Probability;
+}
+
+public class SkillData
+{
+    static public List<SkillSelectTable> SkillSelectTable = new List<SkillSelectTable>()
     {
-        
-    }
+        new SkillSelectTable(){ Type = SelectType.Skill, TargetName = "1", Name = "âìãóó£íe", Level = 0, Probability = 80 },
+        new SkillSelectTable(){ Type = SelectType.Skill, TargetName = "1", Name = "ãﬂãóó£îÕàÕ", Level = 0, Probability = 80 },
+        new SkillSelectTable(){ Type = SelectType.Passive, TargetName = "1", Name = "çUåÇUP", Level = 0, Probability = 40 },
+        new SkillSelectTable(){ Type = SelectType.Passive, TargetName = "1", Name = "ë¨ìxUP", Level = 0, Probability = 20 },
+        new SkillSelectTable(){ Type = SelectType.Passive, TargetName = "1", Name = "çUåÇë¨ìxUP", Level = 5, Probability = 10 },
+        new SkillSelectTable(){ Type = SelectType.Execute, TargetName = "1", Name = "âÒïú", Level = 0, Probability = 90 },
+        new SkillSelectTable(){ Type = SelectType.Execute, TargetName = "1", Name = "ÉSÅ[ÉãÉh", Level = 0, Probability = 40 }
+    };
 }
