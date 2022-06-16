@@ -17,7 +17,6 @@ public abstract class WeaponBase : MonoBehaviour, IObjectPool, ILevel
     public WeaponData WeaponData => _weaponData;
 
     private int _level = 0;
-    //public int Level => _level;
     private int _power;
     public int Power => _weaponData.Wepon[_level].Power;
     private float _interval;
@@ -28,6 +27,11 @@ public abstract class WeaponBase : MonoBehaviour, IObjectPool, ILevel
     private void Awake()
     {
         SetParamator(_weaponData);
+    }
+
+    public void Init()
+    {
+        _level = 0;
     }
 
     virtual public void OnStart() { }
@@ -64,13 +68,14 @@ public abstract class WeaponBase : MonoBehaviour, IObjectPool, ILevel
 
     private void SetParamator(WeaponData weaponData)
     {
-        Debug.Log(weaponData.Wepon[_level].Power);
-        Debug.Log(weaponData.Wepon[_level].Interval);
-        Debug.Log(weaponData.Wepon[_level].Quantity);
-
+        Debug.Log(_level);
         _power = weaponData.Wepon[_level].Power;
         _interval = weaponData.Wepon[_level].Interval;
         _quantity = weaponData.Wepon[_level].Quantity;
+
+        Debug.Log(_power);
+        Debug.Log(_interval);
+        Debug.Log(_quantity);
     }
 
     public void LevelUp()

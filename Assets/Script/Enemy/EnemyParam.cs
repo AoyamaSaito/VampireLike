@@ -5,12 +5,19 @@ using UnityEngine;
 
 public class EnemyParam : MonoBehaviour, IWeaponHit
 {
+    [SerializeField] GameObject _exp;
     public event Action OnDamage;
     public event Action OnDeath;
 
-    int _hp = 0;
-    int _power = 0;
-    GameObject _expObject = null;
+    int _hp = 10;
+    int _power = 1;
+    //GameObject _expObject = null;
+    PoolEnemy _poolEnemy;
+
+    private void Start()
+    {
+        _poolEnemy = GetComponent<PoolEnemy>();
+    }
 
     public void WeaponHit(int damage)
     {
@@ -19,7 +26,8 @@ public class EnemyParam : MonoBehaviour, IWeaponHit
 
         if(_hp <= 0)
         {
-            OnDeath();
+            Instantiate(_exp, transform.position, Quaternion.identity);
+            _poolEnemy.Destroy();
         }
     }
 }

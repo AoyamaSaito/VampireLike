@@ -6,42 +6,35 @@ using UnityEngine;
 
 public class WeaponThrower : SingletonMonoBehaviour<WeaponThrower>
 {
-    [SerializeField] List<WeaponBase> _weaponBases;
+    [SerializeField] WeaponBase _weapon;
     [SerializeField] Transform _root;
 
-    List<ObjectPool<WeaponBase>> _weaponPool = new List<ObjectPool<WeaponBase>>();
-    public List<ObjectPool<WeaponBase>> WeaponPool => _weaponPool;
+    ObjectPool<WeaponBase> _weaponPool = new ObjectPool<WeaponBase>();
+    public ObjectPool<WeaponBase> WeaponPool => _weaponPool;
+    private IEnumerator _coroutine;
 
     private void Start()
     {
+        _weapon.Init();
         Throw();
     }
 
     private void Throw()
     {
-        for(int i = 0; i < _weaponBases.Count; ++i)
-        {
-            ObjectPool<WeaponBase> weaponPool = new ObjectPool<WeaponBase>();
-            foreach(var weapon in _weaponBases)
-            {
-                weaponPool.SetBaseObj(weapon, _root);
-                weaponPool.SetCapacity(10);
+        _weaponPool.SetBaseObj(_weapon, _root);
+        _weaponPool.SetCapacity(20);
 
-                StartCoroutine(ThrowTimer(weapon, weaponPool));
-            }
-        }
+        _coroutine = ThrowTimer(_weapon, _weaponPool);
+        StartCoroutine(_coroutine);
     }
 
     IEnumerator ThrowTimer(WeaponBase weapon, ObjectPool<WeaponBase> weaponPool)
     {
         bool n = true;
-        Debug.Log("ThrowŠJŽn");
         while (n!)
         {
             float _interval = weapon.Interval;
-            Debug.Log("‘Ò‹@");
             yield return new WaitForSeconds(_interval);
-            Debug.Log("Throw");
             for (int i = 0; i < weapon.Quantity; ++i)
             {
                 weaponPool.Instantiate();
@@ -51,27 +44,13 @@ public class WeaponThrower : SingletonMonoBehaviour<WeaponThrower>
 
     public void StopThrow()
     {
-        foreach (var weaponPool in _weaponPool)
-        {
-            foreach (var weapon in _weaponBases)
-            {
-                StopCoroutine(ThrowTimer(weapon, weaponPool));
-            }
-        }
-    }
-
-    public void AddWeapon(WeaponBase weapon)
-    {
-        _weaponBases.Add(weapon);
-        StopThrow();
-        Throw();
+        StopCoroutine(_coroutine);
     }
 
     public void LevelUp(string name)
     {
-        foreach(var weapon in _weaponBases.Where(s => s.name == name))
-        {
-            weapon.LevelUp();
-        }
+        StopThrow();
+        _weapon.LevelUp();
+        Throw();
     }
 }

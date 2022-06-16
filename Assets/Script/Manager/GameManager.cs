@@ -39,6 +39,9 @@ public class GameManager
             case SelectType.Skill:
                 WeaponThrower.Instance.LevelUp(table.TargetName);
                 break;
+            case SelectType.Passive:
+
+                break;
         }
 
         if (_stackLevelup > 0)

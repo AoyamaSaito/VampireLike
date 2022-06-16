@@ -16,10 +16,9 @@ public class Axe : WeaponBase
     {
         _rb.velocity = Vector2.zero;
         _rb.angularVelocity = 0;
-        Debug.Log("”­ŽË");
         transform.position = PlayerManager.Instance.Player.transform.position;
 
-        Vector3 dir = new Vector3(Random.Range(0.5f, -0.5f), 1, 0).normalized;
+        Vector3 dir = new Vector3(Random.Range(0.7f, -0.7f), 1, 0).normalized;
         _rb.AddForce(dir * _movePower, ForceMode2D.Impulse);
         _rb.AddTorque(300f, ForceMode2D.Force);
     }

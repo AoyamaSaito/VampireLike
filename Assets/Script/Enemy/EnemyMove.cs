@@ -7,6 +7,7 @@ using UnityEngine;
 public class EnemyMove : MonoBehaviour
 {
     [SerializeField] float _speed = 1;
+    [SerializeField] float _knockBackPower = 50;
 
     bool _isMove = false;
 
@@ -33,7 +34,19 @@ public class EnemyMove : MonoBehaviour
         _poolEnemy = GetComponent<PoolEnemy>();
         _poolEnemy?.ObserveEveryValueChanged(_poolEnemy => _poolEnemy.IsActive)
             .Subscribe(value => Active(value));
+        
+        EnemyParam enemyParam = GetComponent<EnemyParam>();
+        if(enemyParam != null)
+        {
+            enemyParam.OnDamage += KnockBack;
+        }
+    }
 
+    private void KnockBack()
+    {
+        StartCoroutine(KnockBackCor());
+        Vector3 dir = _playerManager.ReturnPlayerDirection(transform.position).normalized * -1;
+        _rb.AddForce(dir * _knockBackPower, ForceMode2D.Impulse);
     }
     
     void Update()
@@ -67,5 +80,12 @@ public class EnemyMove : MonoBehaviour
     {
         _isMove = false;
         _rb.WakeUp();
+    }
+
+    IEnumerator KnockBackCor()
+    {
+        _isMove = false;
+        yield return new WaitForSeconds(0.1f);
+        _isMove = true;
     }
 }

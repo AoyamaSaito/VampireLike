@@ -10,7 +10,7 @@ public class ObjectPool<T> where T : UnityEngine.Object, IObjectPool
 {
     T BaseObj;
     Transform Parent;
-    List<T> Pool = new ();
+    public List<T> Pool = new ();
     int Index = 0;
 
     public void SetBaseObj(T obj, Transform parent)

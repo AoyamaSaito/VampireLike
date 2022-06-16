@@ -14,11 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _wepon:
   - _power: 5
-    _interval: 1.7
-    _quantity: 2
-  - _power: 6
-    _interval: 1.4
+    _interval: 1.5
     _quantity: 3
-  - _power: 7
-    _interval: 1
+  - _power: 6
+    _interval: 1.5
     _quantity: 4
+  - _power: 7
+    _interval: 1.5
+    _quantity: 4
+  - _power: 8
+    _interval: 1.5
+    _quantity: 5
+  - _power: 9
+    _interval: 1.5
+    _quantity: 5

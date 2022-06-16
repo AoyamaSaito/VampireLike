@@ -6,9 +6,6 @@ public class WeaponData : ScriptableObject
 {
     [SerializeField] Weapon[] _wepon;
 
-    //int _level = 0;
-
-    //public int Level => _level;
     public Weapon[] Wepon => _wepon;
 }
 

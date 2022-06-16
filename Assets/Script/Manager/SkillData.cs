@@ -22,12 +22,9 @@ public class SkillData
 {
     static public List<SkillSelectTable> SkillSelectTable = new List<SkillSelectTable>()
     {
-        new SkillSelectTable(){ Type = SelectType.Skill, TargetName = "1", Name = "遠距離弾", Level = 0, Probability = 80 },
-        new SkillSelectTable(){ Type = SelectType.Skill, TargetName = "1", Name = "近距離範囲", Level = 0, Probability = 80 },
-        new SkillSelectTable(){ Type = SelectType.Passive, TargetName = "1", Name = "攻撃UP", Level = 0, Probability = 40 },
+        new SkillSelectTable(){ Type = SelectType.Skill, TargetName = "1", Name = "Axeレベルアップ", Level = 0, Probability = 80 },
         new SkillSelectTable(){ Type = SelectType.Passive, TargetName = "1", Name = "速度UP", Level = 0, Probability = 20 },
         new SkillSelectTable(){ Type = SelectType.Passive, TargetName = "1", Name = "攻撃速度UP", Level = 5, Probability = 10 },
         new SkillSelectTable(){ Type = SelectType.Execute, TargetName = "1", Name = "回復", Level = 0, Probability = 90 },
-        new SkillSelectTable(){ Type = SelectType.Execute, TargetName = "1", Name = "ゴールド", Level = 0, Probability = 40 }
     };
 }

@@ -5,19 +5,13 @@ using UnityEngine;
 
 public class SkillSelect : SingletonMonoBehaviour<SkillSelect>
 {
+    [SerializeField] CanvasGroup _canvas;
     [SerializeField] List<GameObject> _selectList;
 
     List<SkillSelectTable> _selectTable = new List<SkillSelectTable>();
     List<UnityEngine.UI.Text> _selectText = new List<UnityEngine.UI.Text>();
-    CanvasGroup _canvas;
 
     bool _startEvent = false;
-
-    public override void OnAwake()
-    {
-        _canvas = GetComponent<CanvasGroup>();
-        //_canvas.alpha = 0;
-    }
 
     void Start()
     {

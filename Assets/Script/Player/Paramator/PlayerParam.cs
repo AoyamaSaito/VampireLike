@@ -18,4 +18,14 @@ public class PlayerParam : MonoBehaviour, IPlayerHit
     {
 
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        GetExp(collision);
+    }
+
+    private void GetExp(Collider2D collider)
+    {
+        collider.GetComponent<IGetExp>()?.HitExp();
+    }
 }
