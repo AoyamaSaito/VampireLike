@@ -68,14 +68,9 @@ public abstract class WeaponBase : MonoBehaviour, IObjectPool, ILevel
 
     private void SetParamator(WeaponData weaponData)
     {
-        Debug.Log(_level);
         _power = weaponData.Wepon[_level].Power;
         _interval = weaponData.Wepon[_level].Interval;
         _quantity = weaponData.Wepon[_level].Quantity;
-
-        Debug.Log(_power);
-        Debug.Log(_interval);
-        Debug.Log(_quantity);
     }
 
     public void LevelUp()

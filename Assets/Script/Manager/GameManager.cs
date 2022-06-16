@@ -42,6 +42,9 @@ public class GameManager
             case SelectType.Passive:
 
                 break;
+            case SelectType.Execute:
+                PlayerManager.Instance.Player.GetComponent<PlayerParam>().Heal();
+                break;
         }
 
         if (_stackLevelup > 0)

@@ -4,5 +4,5 @@ using UnityEngine;
 
 interface IPlayerHit
 {
-    void PlayerHit(int damage);
+    void PlayerHit(float damage);
 }
