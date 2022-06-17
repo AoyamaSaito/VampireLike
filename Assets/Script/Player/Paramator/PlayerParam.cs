@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerParam : MonoBehaviour, IPlayerHit
@@ -19,6 +21,8 @@ public class PlayerParam : MonoBehaviour, IPlayerHit
     private void Init()
     {
         PlayerManager.Instance.SetPlayer(this.gameObject);
+        this.ObserveEveryValueChanged(i => i._hp)
+            .Subscribe(_ => Debug.Log(_hp));
     }
 
     public void Heal()
@@ -28,8 +32,10 @@ public class PlayerParam : MonoBehaviour, IPlayerHit
 
     public void PlayerHit(float damage)
     {
-        if(0 >= _currentHp - damage) return;
-        Debug.Log("Damage");
+        if(0 >= _currentHp - damage)
+        {
+            SceneManager.LoadScene("Result");
+        }
         _currentHp -= damage;
         _slider.value = _currentHp / _hp;
     }

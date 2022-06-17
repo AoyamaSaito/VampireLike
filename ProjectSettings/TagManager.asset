@@ -3,15 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Aria
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Aria
   - Water
   - UI
-  - 
+  - Player
   - 
   - 
   - 

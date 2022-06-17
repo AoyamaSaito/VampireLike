@@ -65,14 +65,20 @@ public class SkillSelect : SingletonMonoBehaviour<SkillSelect>
         {
             foreach (var s in list)
             {
-                if (rand < s.Probability)
-                {
-                    _selectTable[i] = s;
-                    _selectText[i].text = s.Name;
-                    list = list.Where(ls => !(ls.Type == s.Type && ls.TargetName == s.TargetName));
-                    break;
-                }
+                //if (rand < s.Probability)
+                //{
+                //    Debug.Log(s.Name);
+                //    _selectTable[i] = s;
+                //    _selectText[i].text = s.Name;
+                //    list = list.Where(ls => !(ls.Type == s.Type && ls.TargetName == s.TargetName));
+                //    break;
+                //}
+                Debug.Log(s.Name);
+                _selectTable[i] = s;
+                _selectText[i].text = s.Name;
+                list = list.Where(ls => !(ls.Type == s.Type && ls.TargetName == s.TargetName));
                 rand -= s.Probability;
+                break;
             }
         }
     }

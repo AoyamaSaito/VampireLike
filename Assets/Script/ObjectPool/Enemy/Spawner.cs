@@ -4,16 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Spawner : MonoBehaviour
+public class Spawner : SingletonMonoBehaviour<Spawner>
 {
     [SerializeField] float _time = 5f;
     [SerializeField] float _spawnPosition = 10;
     [SerializeField] int _spawnCount = 100;
     [SerializeField] PoolEnemy _prefab;
     [SerializeField] Transform _root;
+    [SerializeField] Count c;
 
-    float _timer = 0.0f;
+    public int Count = 0;
+    public float _timer = 0.0f;
     float _cRad = 0.0f;
     Vector3 _popPos = new Vector3(0, 0, 0);
 
@@ -22,6 +25,7 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
+        Count = 0;
         _enemyPool.SetBaseObj(_prefab, _root);
         _enemyPool.SetCapacity(_spawnCount);
 
@@ -31,6 +35,7 @@ public class Spawner : MonoBehaviour
     private void Update()
     {
         SpawnTimer();
+        c.Set(Count);
     }
 
     private void SpawnTimer()

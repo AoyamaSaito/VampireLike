@@ -26,8 +26,9 @@ public class EnemyParam : MonoBehaviour, IWeaponHit
 
         if(_hp <= 0)
         {
-            Instantiate(_exp, transform.position, Quaternion.identity);
+            Spawner.Instance.Count++;
             _poolEnemy.Destroy();
+            Instantiate(_exp, transform.position, Quaternion.identity);
         }
     }
 

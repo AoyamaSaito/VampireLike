@@ -7,6 +7,7 @@ public class PlayerMove : MonoBehaviour
 {
     [SerializeField] float _speed = 5;
 
+    float _addSpeed = 0;
     bool _stop = false;
 
     Rigidbody2D _rb;
@@ -19,6 +20,7 @@ public class PlayerMove : MonoBehaviour
     void Init()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _addSpeed = 0;
 
         GameManager gameManager = GameManager.Instance;
         if (gameManager != null)

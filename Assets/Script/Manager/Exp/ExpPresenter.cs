@@ -17,6 +17,7 @@ public class ExpPresenter : MonoBehaviour
         _expManager.CurrentExp
                 .Subscribe(x =>
                 {
+                    Debug.Log(_expManager.CurrentExp);
                     // View‚É”½‰f
                     _expSlider.SetValue((float)x / _expManager.LevlUpExp);
                 }).AddTo(this);

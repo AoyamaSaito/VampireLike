@@ -20,16 +20,32 @@ public class ExpManager
     public void GetExp(int exp)
     {
         _currentExp.Value += exp;
-        Debug.Log($"Œ»Ý‚ÌŒoŒ±’l@{_currentExp.Value}");
         if(_currentExp.Value >= _levelUpExp)
         {
             LevelUp(_currentExp.Value - _levelUpExp);
         }
     }
 
+    public bool Judge()
+    {
+        float a = _currentExp.Value / _levelUpExp;
+        if(a >= 0.5)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void Reset()
+    {
+        _currentExp.Value = 0;
+    }
+
     private void LevelUp(int remainder)
     {
-        Debug.Log("LevelUp");
         SkillSelect.Instance.SelectStart();
         _currentExp.Value = 0;
         _level++;
